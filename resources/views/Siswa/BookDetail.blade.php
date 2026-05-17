@@ -384,13 +384,35 @@
                         $hasBorrowedBefore = false;
                         $isWishlisted = false;
                         $isRejected = false;
+                        $hasFine = false;
                         $cooldownExpiry = null;
 
-                        // Cukup gunakan auth() standar karena tabel dan model sudah digabung
                         if(auth()->check()) {
                             $currentUser = auth()->user();
+                            $now = \Carbon\Carbon::now('Asia/Jakarta');
                             
-                            // 1. Cek status peminjaman aktif (User_id sesuai PrimaryKey model)
+                            $fineBalance = \App\Models\UserFineBalance::where('user_id', $currentUser->user_id)->first();
+                            $fixedFine = $fineBalance ? $fineBalance->total_fine : 0;
+
+                            $runningFine = 0;
+                            $overdueLoans = \App\Models\Loan::where('user_id', $currentUser->user_id)
+                                ->where('status', 'borrowed')
+                                ->where('due_date', '<', $now)
+                                ->get();
+
+                            foreach ($overdueLoans as $loan) {
+                                $due = \Carbon\Carbon::parse($loan->due_date);
+                                $days = ceil($due->diffInSeconds($now) / 86400);
+                                
+                                if ($days >= 1) $runningFine += 10000;
+                                if ($days > 1) $runningFine += ($days - 1) * 5000;
+                            }
+
+                            if (($fixedFine + $runningFine) > 0) {
+                                $hasFine = true;
+                            }
+
+                            
                             $isCurrentlyBorrowed = \App\Models\Loan::where('user_id', $currentUser->user_id)
                                 ->where('book_id', $book->id)
                                 ->where('status', 'borrowed')
@@ -402,14 +424,11 @@
                                 ->exists();
 
 
-                            // 2. Cek apakah PERNAH meminjam sebelumnya (Ada di history/sudah dikembalikan)
-                            // Ini akan memicu tombol Emerald "Borrow Again"
                             $hasBorrowedBefore = \App\Models\Loan::where('user_id', $currentUser->user_id)
                                 ->where('book_id', $book->id)
                                 ->where('status', 'returned')
                                 ->exists();
 
-                            // 3. Cek status wishlist menggunakan relasi yang ada di model User
                             $isWishlisted = $currentUser->wishlists()->where('book_id', $book->id)->exists();
 
                             $rejectedLoan = \App\Models\Loan::where('user_id', auth()->id())
@@ -440,6 +459,16 @@
                             Already Borrowed
                         </button>
 
+                    @elseif($hasFine)
+                        <button disabled class="flex-grow flex items-center justify-center gap-4 
+                            bg-slate-200 text-slate-500 px-10 py-6 rounded-[2rem] 
+                            font-black font-accent uppercase tracking-widest text-xs 
+                            cursor-not-allowed border border-slate-300 shadow-inner">
+                            <span class="material-symbols-outlined text-xl">block</span>
+                            Pay Off Your Fine First
+                        </button>
+
+
                     @elseif($isPending) {{-- TAMBAHKAN KONDISI INI --}}
                         <button disabled class="flex-grow flex items-center justify-center gap-4 
                             bg-slate-200 text-slate-500 px-10 py-6 rounded-[2rem] 
@@ -458,8 +487,6 @@
                             <span class="material-symbols-outlined text-xl">timer_off</span>
                             <span>Retry in <span id="cooldown-timer">24:00:00</span></span>
                         </button>
-
-                        
 
                     @elseif($hasBorrowedBefore)
                             {{-- Tampilan Tombol Jika Pernah Meminjam Sebelumnya (Blue to Emerald Gradient) --}}

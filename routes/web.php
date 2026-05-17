@@ -57,6 +57,7 @@ Route::middleware(['auth'])->prefix('dashboard')->group(function () {
             Route::post('/admin/manage-books/store', 'store')->name('admin.books.store');
             Route::put('/admin/manage-books/{book}', 'update')->name('admin.books.update');
             Route::delete('/admin/manage-books/{book}', 'destroy')->name('admin.books.destroy');
+            Route::get('/admin/manage-books/check-title', 'checkTitle')->name('admin.books.check');
         });
 
         // C. Manajemen Member & Transaksi
@@ -76,7 +77,10 @@ Route::middleware(['auth'])->prefix('dashboard')->group(function () {
 
 
         Route::get('/admin/reports', [LendingReportController::class, 'index'])->name('admin.reports');
+        Route::get('/admin/reports/export-pdf', [LendingReportController::class, 'exportPdf'])->name('admin.reports.export_pdf');
+        Route::get('/admin/reports/export-fine-pdf', [LendingReportController::class, 'exportFinePdf'])->name('admin.reports.export_fine_pdf');
         Route::delete('/admin/reports/{id}', [LendingReportController::class, 'destroy'])->name('admin.reports.destroy');
+        Route::delete('/admin/reports/fine-delete/{id}', [LendingReportController::class, 'destroyFineReport'])->name('admin.reports.fineDestroy');
 
         // D. Permintaan Pinjaman
         Route::prefix('admin')->controller(\App\Http\Controllers\Admin\AdminLoanController::class)->group(function () {

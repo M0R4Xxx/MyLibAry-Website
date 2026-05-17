@@ -35,13 +35,16 @@ class User extends Authenticatable
                     ->withTimestamps(); 
     }
 
-
     public function loans()
     {
         return $this->hasMany(Loan::class, 'user_id', 'user_id');
     }
 
- 
+    public function fineBalance()
+    {
+        return $this->hasOne(UserFineBalance::class, 'user_id', 'user_id');
+    }
+
     public function isAdmin()
     {
         return $this->role === 'admin';

@@ -52,7 +52,7 @@ class AuthController extends Controller
                 'regex:/^[a-zA-Z0-9._%+-]+@gmail\.com$/i'
             ],
             'password' => 'required|min:6|max:14',
-            'role'     => 'required|in:admin,siswa',
+
         ], [
             'username.required'   => 'Username tidak boleh kosong.',
             'username.min'        => 'Username minimal 4 huruf.',
@@ -77,7 +77,7 @@ class AuthController extends Controller
             'username' => $request->username,
             'email'    => $request->email,
             'password' => $request->password, 
-            'role'     => $request->role,
+            'role'     => 'siswa', 
         ]);
 
         return redirect('/login')->with('success', 'Daftar berhasil! Silakan login.');
@@ -111,19 +111,22 @@ class AuthController extends Controller
 
         $user = User::where('email', $request->email)->first();
 
-        session([
-            'reset_email' => $request->email,
-            'reset_username' => $user->username 
-        ]);
+        session()->flash('reset_allowed', true); 
+        session()->flash('reset_email', $request->email);
+        session()->flash('reset_username', $user->username);
 
         return redirect()->route('password.reset.form');
     }
+    
 
     public function showResetForm()
     {
-        if (!session()->has('reset_email') || !session()->has('reset_username')) {
-            return redirect()->route('password.request')->with('error', 'Akses ilegal! Silakan validasi email Anda terlebih dahulu.');
+        if (!session()->has('reset_allowed')) {
+            return redirect()->route('password.request')
+                ->with('error', 'Akses ditolak! Silakan masukkan email kembali.');
         }
+
+        session()->reflash();
         
         return view('ResetPassword');
     }
@@ -142,16 +145,17 @@ class AuthController extends Controller
         if ($validator->fails()) {
             return back()->withErrors($validator)->withInput();
         }
+
         $user = User::where('username', $request->username)
                     ->where('email', $request->email)
                     ->first();
 
         if (!$user) {
-            return back()->with('error', 'Data Username atau Email tidak ditemukan.')->withInput();
+        return back()->with('error', 'Data tidak valid.')->withInput();
         }
-        $user->update([
-            'password' => $request->password
-        ]);
+
+        $user->update(['password' => $request->password]);
+        session()->forget(['reset_allowed', 'reset_email', 'reset_username']);
 
         return redirect()->route('login')->with('success', 'Password berhasil diperbarui! Silakan login.');
     }

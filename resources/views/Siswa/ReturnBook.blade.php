@@ -750,7 +750,7 @@
                 let isPulse = false;
 
                 if (remaining <= 0) {
-                    statusColor = "slate";
+                    statusColor = "rose";
                     statusIcon = "history_toggle_off";
                 } else if (percentage >= 85) {
                     statusColor = "rose";
@@ -1062,8 +1062,8 @@
                     setBadge('emerald');
                 } else if (remaining <= 0) {
                     if (miniText) miniText.innerText = "OVERDUE";
-                    setBadge('slate');
-                    if (bar) bar.className = "js-progress-bar h-full rounded-full bg-slate-400 transition-all duration-1000";
+                    setBadge('rose');
+                    if (bar) bar.className = "js-progress-bar h-full rounded-full bg-gradient-to-r from-rose-500 to-red-600 transition-all duration-1000";
                     if (miniIcon) {
                         miniIcon.innerText = "history_toggle_off";
                         miniIcon.classList.remove('animate-spin', 'animate-pulse');

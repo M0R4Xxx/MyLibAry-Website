@@ -11,7 +11,7 @@
     
     <style type="text/tailwindcss">
         :root {
-            --bg-silver: #F8F9FC;
+            --bg-silver: #2b6cee;
             --primary-blue: #2b6cee;
             --charcoal: #334155;
             --slate-label: #64748b;

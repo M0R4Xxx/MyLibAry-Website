@@ -1919,7 +1919,7 @@
                                             if (remaining <= 0) {
                                                 if (text) text.innerText = "OVERDUE";
                                                 if (icon) { icon.innerText = "history_toggle_off"; icon.classList.remove('animate-pulse'); }
-                                                updateStatusClass(badge, "bg-slate-600", "rgba(71, 85, 105, 0.5)");
+                                                updateStatusClass(badge, "bg-rose-600", "rgba(225, 29, 72, 0.6)");
                                             } else {
                                                 const days = Math.floor(remaining / (1000 * 60 * 60 * 24));
                                                 const hours = Math.floor((remaining % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
@@ -1992,8 +1992,7 @@
                                             Total Outstanding
                                         </span>
                                     </div>
-                                    
-
+                                
                                     <div class="relative pl-4 mt-1 group">
                                         {{-- Jalur Garis Abu-abu: Lebar w-1 (3px) TETAP, Tinggi h-8 disesuaikan font --}}
                                         <div class="absolute left-0 top-1/2 -translate-y-1/2 w-[3px] h-8 bg-slate-200 rounded-full overflow-hidden transition-all duration-700 ease-[cubic-bezier(0.23,1,0.32,1)]">
@@ -2540,78 +2539,66 @@
                             <div class="w-14 flex-shrink-0"></div> 
 
                             <div class="flex-grow grid grid-cols-6 items-center gap-6">
-                                {{-- 1. Book --}}
-                                <div class="flex items-center gap-2 group/item cursor-default w-fit transform -translate-x-[35px]">
-                                    <div class="flex items-center justify-center w-6 h-6 rounded-md bg-fuchsia-500 text-white shadow-md shadow-fuchsia-500/20 shrink-0 transition-all duration-500 ease-in-out group-hover/item:rotate-12 group-hover/item:scale-110">
-                                        <span class="material-symbols-outlined text-[14px] font-bold">import_contacts</span>
+                                    {{-- 1. Book --}}
+                                    <div class="flex items-center gap-2 group/item cursor-default w-fit transform -translate-x-[35px]">
+                                        <div class="flex items-center justify-center w-6 h-6 rounded-md bg-fuchsia-500 text-white shadow-md shadow-fuchsia-500/20 shrink-0 transition-all duration-500 ease-in-out group-hover/item:rotate-12 group-hover/item:scale-110">
+                                            <span class="material-symbols-outlined text-[14px] font-bold">import_contacts</span>
+                                        </div>
+                                        <span class="font-accent text-[10px] font-black uppercase tracking-[0.2em] text-fuchsia-600/60 leading-none whitespace-nowrap">
+                                            Book Detail
+                                        </span>
                                     </div>
-                                    <span class="font-accent text-[10px] font-black uppercase tracking-[0.2em] text-fuchsia-600/60 leading-none whitespace-nowrap">
-                                        Book Detail
-                                    </span>
-                                </div>
 
-                                {{-- 2. Borrower --}}
-                                <div class="flex items-center gap-2 group/item cursor-default w-fit transform translate-x-[44px]">
-                                    <div class="flex items-center justify-center w-6 h-6 rounded-md bg-fuchsia-500 text-white shadow-md shadow-fuchsia-500/20 shrink-0 transition-all duration-500 ease-in-out group-hover/item:rotate-12 group-hover/item:scale-110">
-                                        <span class="material-symbols-outlined text-[14px] font-bold">group</span>
+                                    {{-- 2. Borrower --}}
+                                    <div class="flex items-center gap-2 group/item cursor-default w-fit transform translate-x-[16px]">
+                                        <div class="flex items-center justify-center w-6 h-6 rounded-md bg-fuchsia-500 text-white shadow-md shadow-fuchsia-500/20 shrink-0 transition-all duration-500 ease-in-out group-hover/item:rotate-12 group-hover/item:scale-110">
+                                            <span class="material-symbols-outlined text-[14px] font-bold">group</span>
+                                        </div>
+                                        <span class="font-accent text-[10px] font-black uppercase tracking-[0.2em] text-fuchsia-600/60 leading-none whitespace-nowrap">
+                                            Borrower
+                                        </span>
                                     </div>
-                                    <span class="font-accent text-[10px] font-black uppercase tracking-[0.2em] text-fuchsia-600/60 leading-none whitespace-nowrap">
-                                        Borrower
-                                    </span>
-                                </div>
 
-                                {{-- 3. Status --}}
-                                <div class="flex items-center gap-2 group/item cursor-default w-fit transform translate-x-[80px]">
-                                    <div class="flex items-center justify-center w-6 h-6 rounded-md bg-fuchsia-500 text-white shadow-md shadow-fuchsia-500/20 shrink-0 transition-all duration-500 ease-in-out group-hover/item:rotate-12 group-hover/item:scale-110">
-                                        <span class="material-symbols-outlined text-[14px] font-bold">info</span>
+                                    {{-- 3. Status --}}
+                                    <div class="flex items-center gap-2 group/item cursor-default w-fit transform translate-x-[42px]">
+                                        <div class="flex items-center justify-center w-6 h-6 rounded-md bg-fuchsia-500 text-white shadow-md shadow-fuchsia-500/20 shrink-0 transition-all duration-500 ease-in-out group-hover/item:rotate-12 group-hover/item:scale-110">
+                                            <span class="material-symbols-outlined text-[14px] font-bold">info</span>
+                                        </div>
+                                        <span class="font-accent text-[10px] font-black uppercase tracking-[0.2em] text-fuchsia-600/60 leading-none whitespace-nowrap">
+                                            Status
+                                        </span>
                                     </div>
-                                    <span class="font-accent text-[10px] font-black uppercase tracking-[0.2em] text-fuchsia-600/60 leading-none whitespace-nowrap">
-                                        Status
-                                    </span>
-                                </div>
 
-                                {{-- 4. Borrow Date --}}
-                                <div class="flex items-center gap-2 group/item cursor-default w-fit transform translate-x-[81px]">
-                                    <div class="flex items-center justify-center w-6 h-6 rounded-md bg-fuchsia-500 text-white shadow-md shadow-fuchsia-500/20 shrink-0 transition-all duration-500 ease-in-out group-hover/item:rotate-12 group-hover/item:scale-110">
-                                        <span class="material-symbols-outlined text-[14px] font-bold">calendar_add_on</span>
+                                    {{-- 4. Borrow Date --}}
+                                    <div class="flex items-center gap-2 group/item cursor-default w-fit transform translate-x-[30px]">
+                                        <div class="flex items-center justify-center w-6 h-6 rounded-md bg-fuchsia-500 text-white shadow-md shadow-fuchsia-500/20 shrink-0 transition-all duration-500 ease-in-out group-hover/item:rotate-12 group-hover/item:scale-110">
+                                            <span class="material-symbols-outlined text-[14px] font-bold">calendar_add_on</span>
+                                        </div>
+                                        <span class="font-accent text-[10px] font-black uppercase tracking-[0.2em] text-fuchsia-600/60 leading-none whitespace-nowrap">
+                                            Loan Date
+                                        </span>
                                     </div>
-                                    <span class="font-accent text-[10px] font-black uppercase tracking-[0.2em] text-fuchsia-600/60 leading-none whitespace-nowrap">
-                                        Loan Date
-                                    </span>
-                                </div>
 
-                                {{-- 5. Due Date --}}
-                                <div class="flex items-center gap-2 group/item cursor-default w-fit transform translate-x-[86px]">
-                                    <div class="flex items-center justify-center w-6 h-6 rounded-md bg-fuchsia-500 text-white shadow-md shadow-fuchsia-500/20 shrink-0 transition-all duration-500 ease-in-out group-hover/item:rotate-12 group-hover/item:scale-110">
-                                        <span class="material-symbols-outlined text-[14px] font-bold">event_busy</span>
+                                    {{-- 5. Due Date --}}
+                                    <div class="flex items-center gap-2 group/item cursor-default w-fit transform translate-x-[34px]">
+                                        <div class="flex items-center justify-center w-6 h-6 rounded-md bg-fuchsia-500 text-white shadow-md shadow-fuchsia-500/20 shrink-0 transition-all duration-500 ease-in-out group-hover/item:rotate-12 group-hover/item:scale-110">
+                                            <span class="material-symbols-outlined text-[14px] font-bold">event_busy</span>
+                                        </div>
+                                        <span class="font-accent text-[10px] font-black uppercase tracking-[0.2em] text-fuchsia-600/60 leading-none whitespace-nowrap">
+                                            Due Date
+                                        </span>
                                     </div>
-                                    <span class="font-accent text-[10px] font-black uppercase tracking-[0.2em] text-fuchsia-600/60 leading-none whitespace-nowrap">
-                                        Due Date
-                                    </span>
-                                </div>
 
-                                <div class="flex items-center gap-2 group/item cursor-default w-fit transform translate-x-[76px]">
-                                    <div class="flex items-center justify-center w-6 h-6 rounded-md bg-fuchsia-500 text-white shadow-md shadow-fuchsia-500/20 shrink-0 transition-all duration-500 ease-in-out group-hover/item:rotate-12 group-hover/item:scale-110">
-                                        <span class="material-symbols-outlined text-[14px] font-bold">event_available</span>
+                                    <div class="flex items-center gap-2 group/item cursor-default w-fit transform translate-x-[32px]">
+                                        <div class="flex items-center justify-center w-6 h-6 rounded-md bg-fuchsia-500 text-white shadow-md shadow-fuchsia-500/20 shrink-0 transition-all duration-500 ease-in-out group-hover/item:rotate-12 group-hover/item:scale-110">
+                                            <span class="material-symbols-outlined text-[14px] font-bold">event_available</span>
+                                        </div>
+                                        <span class="font-accent text-[10px] font-black uppercase tracking-[0.2em] text-fuchsia-600/60 leading-none whitespace-nowrap">
+                                            Returned
+                                        </span>
                                     </div>
-                                    <span class="font-accent text-[10px] font-black uppercase tracking-[0.2em] text-fuchsia-600/60 leading-none whitespace-nowrap">
-                                        Returned
-                                    </span>
                                 </div>
                             </div>
-
-                            {{-- 6. Action Button (Posisi dipertahankan sama persis) --}}
-                            <div class="w-[140px] flex justify-center">
-                                <div class="flex items-center gap-2 group/item cursor-default w-fit transform translate-x-[40px]">
-                                    <div class="flex items-center justify-center w-6 h-6 rounded-md bg-fuchsia-500 text-white shadow-md shadow-fuchsia-500/20 shrink-0 transition-all duration-500 ease-in-out group-hover/item:rotate-12 group-hover/item:scale-110">
-                                        <span class="material-symbols-outlined text-[14px] font-bold">settings_suggest</span>
-                                    </div>
-                                    <span class="font-accent text-[10px] font-black uppercase tracking-[0.2em] text-fuchsia-600/60 leading-none whitespace-nowrap">
-                                        Action
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
 
                            @forelse($allTransactions as $transaction)
                             @php
@@ -2702,7 +2689,7 @@
                                     </div>
                                 </div>
 
-                                    <div class="w-[135px] flex-shrink-0 ml-4">
+                                    <div class="w-[135px] flex-shrink-0 ml-0">
                                         <div class="flex items-center justify-center gap-2 px-3 py-1.5 rounded-xl border transition-all duration-500 cursor-pointer group/category-badge
                                             {{-- KONDISI AWAL --}}  
                                             {{ $clr['bg'] }} {{ $clr['border'] }} {{ $clr['text'] }}
@@ -2795,7 +2782,7 @@
                                         $clr = $color_options[array_rand($color_options)];
                                     @endphp
 
-                                    <div class=" w-[120px] flex-shrink-0 ml-8">
+                                    <div class="w-[120px] flex-shrink-0 ml-5">
                                         {{-- Card Overdue Books: Presisi 100% mengikuti instruksi radius, shadow, & efek hover --}}
                                         <div class="flex items-center justify-center gap-2 px-4 h-8 rounded-xl border transition-all duration-500 cursor-pointer group/category-badge
                                             {{-- KONDISI AWAL --}}
@@ -2866,8 +2853,7 @@
                                         $styleBlue = "--shadow-color: {$clrBlue['shadow']}; --shadow-deep: {$clrBlue['shadow_deep']};";
                                     @endphp
 
-                                    {{-- Tanggal Pinjam: Emerald Edition (Plek Ketiplek 100%) --}}
-                                    <div class="ml-10 text-center w-[120px] flex flex-col items-center group/returned transition-all duration-700 ease-[cubic-bezier(0.4,0,0.2,1)] transform-gpu hover:-translate-y-1 -translate-x-2">
+                                    <div class="ml-8 text-center w-[120px] flex flex-col items-center group/returned transition-all duration-700 ease-[cubic-bezier(0.4,0,0.2,1)] transform-gpu hover:-translate-y-1 -translate-x-2">
                                         <div class="w-full">
                                             <div class="flex items-center px-4 h-9 rounded-full {{ $clrEmerald['bg'] }} text-white transition-all duration-700 ease-[cubic-bezier(0.4,0,0.2,1)] w-full justify-center border-none cursor-default transform-gpu 
                                                 shadow-[0_4px_12px_var(--shadow-color)] 
@@ -2881,8 +2867,7 @@
                                         </div>
                                     </div>
 
-                                    {{-- Tanggal Jatuh Tempo: Rose Edition (Plek Ketiplek 100%) --}}
-                                    <div class="ml-6 text-center w-[120px] flex flex-col items-center group/returned transition-all duration-700 ease-[cubic-bezier(0.4,0,0.2,1)] transform-gpu hover:-translate-y-1 -translate-x-2">
+                                    <div class="ml-8 text-center w-[120px] flex flex-col items-center group/returned transition-all duration-700 ease-[cubic-bezier(0.4,0,0.2,1)] transform-gpu hover:-translate-y-1 -translate-x-2">
                                         <div class="w-full">
                                             <div class="flex items-center px-4 h-9 rounded-full {{ $clrRose['bg'] }} text-white transition-all duration-700 ease-[cubic-bezier(0.4,0,0.2,1)] w-full justify-center border-none cursor-default transform-gpu 
                                                 shadow-[0_4px_12px_var(--shadow-color)] 
@@ -2896,8 +2881,7 @@
                                         </div>
                                     </div>
 
-                                    {{-- Tanggal Pengembalian: Blue Edition (Plek Ketiplek 100%) --}}
-                                    <div class="ml-2 text-center w-[120px] flex flex-col items-center group/returned transition-all duration-700 ease-[cubic-bezier(0.4,0,0.2,1)] transform-gpu hover:-translate-y-1 -translate-x-2">
+                                    <div class="ml-8 text-center w-[120px] flex flex-col items-center group/returned transition-all duration-700 ease-[cubic-bezier(0.4,0,0.2,1)] transform-gpu hover:-translate-y-1 -translate-x-2">
                                         <div class="w-full">
                                             <div class="flex items-center px-4 h-9 rounded-full {{ $clrBlue['bg'] }} text-white transition-all duration-700 ease-[cubic-bezier(0.4,0,0.2,1)] w-full justify-center border-none cursor-default transform-gpu 
                                                 shadow-[0_4px_12px_var(--shadow-color)] 
@@ -2915,28 +2899,6 @@
                                         </div>
                                     </div>        
                                 </div>
-
-                                <div class="flex items-center gap-2 pr-2">
-
-
-                                <form action="{{ route('admin.reports.destroy', $transaction->id) }}" method="POST" class="m-0 inline-flex items-center">     
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" onclick="return confirm('Apakah Anda yakin ingin menghapus permanen transaksi ini?\n\nBuku: {{ $transaction->book->title ?? 'Judul Tidak Ada' }}\nUser: {{ $transaction->user->username ?? $transaction->user->name ?? 'User' }}\nStatus: {{ ucfirst($transaction->status) ?? 'Unknown' }}')"
-                                    class="group/del-btn w-10 h-10 flex items-center justify-center bg-rose-600 text-white rounded-xl transition-all duration-300 transform-gpu cursor-pointer
-                                        /* TAHAP 1: Shadow Fokus (8px) */
-                                        shadow-[0_4px_8px_rgba(225,29,72,0.35)] 
-                                        
-                                        /* TAHAP 2: Hover (Naik, BG, Shadow Rapat 12px) */
-                                        hover:-translate-y-1 hover:bg-rose-500 
-                                        hover:shadow-[0_6px_12px_rgba(225,29,72,0.45)] 
-                                        active:scale-95">
-                                        <span class="material-symbols-outlined text-[20px] transition-transform duration-300 group-hover/del-btn:rotate-12">
-                                            delete
-                                        </span>
-                                    </button>
-                                </form>    
-                                </div>
                             </div>
                             @empty
                                 <div class="col-span-full py-24 flex flex-col items-center justify-center w-full">
@@ -2950,10 +2912,473 @@
                             @endforelse
                         </div>
                     </section>  
+
+
+                    <div class="pt-1 ">
+                        <div class="w-full h-[1.5px] bg-slate-400/30 rounded-full"></div>
+                    </div>
+
+                    <section class="space-y-4">
+                        <div class="flex items-center justify-between px-2 w-full ">
+                            <div class="relative flex items-center gap-1">
+                                <div class="flex flex-col ">
+                                    <h4 class="text-4xl font-extrabold tracking-tighter font-heading pb-1 -mb-1 pr-4 inline-block text-transparent bg-clip-text bg-gradient-to-r from-slate-900 via-amber-600 to-orange-500 transform-gpu" 
+                                        style="
+                                            -webkit-background-clip: text; 
+                                            -webkit-text-fill-color: transparent;
+                                            backface-visibility: hidden;
+                                        ">
+                                        Fine Recapitulation & Transaction Audit Logs
+                                    </h4>
+
+                                    <div class="flex items-center gap-2.5 mt-2">
+                                        <span class="w-8 h-1 bg-amber-500 rounded-full shadow-[0_0_10px_rgba(217,119,6,0.3)]"></span>
+                                        
+                                        <p class="text-amber-600 font-black text-[10px] uppercase tracking-[0.2em] font-accent leading-none">
+                                           Detailed comprehensive audit of overdue penalties and member transaction history reports.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <button onclick="window.location.href='{{ route('admin.reports') }}'" class="group relative isolate overflow-hidden bg-white border border-slate-200 px-6 py-3 rounded-2xl text-amber-600 font-bold text-[10px] 
+                                hover:text-white hover:-translate-y-1.5 hover:shadow-xl hover:shadow-amber-500/30 
+                                transition-all duration-500 ease-[cubic-bezier(0.4,0,0.2,1)] 
+                                flex items-center gap-2 uppercase tracking-widest font-accent shadow-sm shadow-amber-100/50">
+                                
+                                {{-- Layer Gradient Amber-Orange saat Hover --}}
+                                <div class="absolute inset-0 -z-10 bg-gradient-to-r from-amber-600 to-orange-500 opacity-0 group-hover:opacity-100 transition-opacity duration-500 ease-in-out"></div>
+
+                                <span class="relative z-10">See Detailed Penalty Audits</span>
+                                
+                                <span class="material-icons-round text-sm group-hover:translate-x-1 transition-transform duration-500">arrow_forward</span> 
+                            </button>
+                        </div>
+                        
+
+                        <div class="section-container hover-amber group relative isolate !mt-12">
+                                    <div class="glow-edge absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-fuchsia-400/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 z-10"></div>
+                                    <div class="absolute inset-0 bg-white/10 transition-colors duration-700 ease-in-out group-hover:bg-white/20 -z-10"></div>
+
+                                    <div class="flex items-center gap-6 px-5 mb-6 relative z-20 -top-[11px]">
+                                    <div class="w-14 flex-shrink-0"></div> 
+
+                                     <div class="flex-grow grid grid-cols-7 items-center gap-6">
+                                        {{-- 1. Book --}}
+                                        <div class="flex items-center gap-2 group/item cursor-default w-fit transform -translate-x-[35px]">
+                                            <div class="flex items-center justify-center w-6 h-6 rounded-md bg-amber-500 text-white shadow-md shadow-amber-500/20 shrink-0 transition-all duration-500 ease-in-out group-hover/item:rotate-12 group-hover/item:scale-110">
+                                                <span class="material-symbols-outlined text-[14px] font-bold">import_contacts</span>
+                                            </div>
+                                            <span class="font-accent text-[10px] font-black uppercase tracking-[0.2em] text-amber-600/60 leading-none whitespace-nowrap">
+                                                Book Detail
+                                            </span>
+                                        </div>
+
+                                        {{-- 2. Borrower --}}
+                                        <div class="flex items-center gap-2 group/item cursor-default w-fit transform translate-x-[16px]">
+                                            <div class="flex items-center justify-center w-6 h-6 rounded-md bg-amber-500 text-white shadow-md shadow-amber-500/20 shrink-0 transition-all duration-500 ease-in-out group-hover/item:rotate-12 group-hover/item:scale-110">
+                                                <span class="material-symbols-outlined text-[14px] font-bold">group</span>
+                                            </div>
+                                            <span class="font-accent text-[10px] font-black uppercase tracking-[0.2em] text-amber-600/60 leading-none whitespace-nowrap">
+                                                Borrower
+                                            </span>
+                                        </div>
+
+                                        {{-- 4. Borrow Date --}}
+                                        <div class="flex items-center gap-2 group/item cursor-default w-fit transform translate-x-[20px]">
+                                            <div class="flex items-center justify-center w-6 h-6 rounded-md bg-amber-500 text-white shadow-md shadow-amber-500/20 shrink-0 transition-all duration-500 ease-in-out group-hover/item:rotate-12 group-hover/item:scale-110">
+                                                <span class="material-symbols-outlined text-[14px] font-bold">calendar_add_on</span>
+                                            </div>
+                                            <span class="font-accent text-[10px] font-black uppercase tracking-[0.2em] text-amber-600/60 leading-none whitespace-nowrap">
+                                                Loan Date
+                                            </span>
+                                        </div>
+
+                                        {{-- 5. Due Date --}}
+                                        <div class="flex items-center gap-2 group/item cursor-default w-fit transform translate-x-[10px]">
+                                            <div class="flex items-center justify-center w-6 h-6 rounded-md bg-amber-500 text-white shadow-md shadow-amber-500/20 shrink-0 transition-all duration-500 ease-in-out group-hover/item:rotate-12 group-hover/item:scale-110">
+                                                <span class="material-symbols-outlined text-[14px] font-bold">event_busy</span>
+                                            </div>
+                                            <span class="font-accent text-[10px] font-black uppercase tracking-[0.2em] text-amber-600/60 leading-none whitespace-nowrap">
+                                                Due Date
+                                            </span>
+                                        </div>
+
+                                        <div class="flex items-center gap-2 group/item cursor-default w-fit transform -translate-x-[6px]">
+                                            <div class="flex items-center justify-center w-6 h-6 rounded-md bg-amber-500 text-white shadow-md shadow-amber-500/20 shrink-0 transition-all duration-500 ease-in-out group-hover/item:rotate-12 group-hover/item:scale-110">
+                                                <span class="material-symbols-outlined text-[14px] font-bold">event_available</span>
+                                            </div>
+                                            <span class="font-accent text-[10px] font-black uppercase tracking-[0.2em] text-amber-600/60 leading-none whitespace-nowrap">
+                                                Returned
+                                            </span>
+                                        </div>
+
+                                        <div class="flex items-center gap-2 group/item cursor-default w-fit transform -translate-x-[2px]">
+                                            <div class="flex items-center justify-center w-6 h-6 rounded-md bg-amber-500 text-white shadow-md shadow-amber-500/20 shrink-0 transition-all duration-500 ease-in-out group-hover/item:rotate-12 group-hover/item:scale-110">
+                                                <span class="material-symbols-outlined text-[14px] font-bold">payments</span>
+                                            </div>
+                                            <span class="font-accent text-[10px] font-black uppercase tracking-[0.2em] text-amber-600/60 leading-none whitespace-nowrap">
+                                                Fine Value
+                                            </span>
+                                        </div>
+
+                                         {{-- 3. Status --}}
+                                        <div class="flex items-center gap-2 group/item cursor-default w-fit transform translate-x-[18px]">
+                                            <div class="flex items-center justify-center w-6 h-6 rounded-md bg-amber-500 text-white shadow-md shadow-amber-500/20 shrink-0 transition-all duration-500 ease-in-out group-hover/item:rotate-12 group-hover/item:scale-110">
+                                                <span class="material-symbols-outlined text-[14px] font-bold">info</span>
+                                            </div>
+                                            <span class="font-accent text-[10px] font-black uppercase tracking-[0.2em] text-amber-600/60 leading-none whitespace-nowrap">
+                                                Status
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                @forelse($fineReports as $fine)
+                                    @php
+                                        $durationColors = [
+                                            ['bg' => 'bg-blue-100',    'border' => 'border-blue-200',    'border_l' => 'border-l-blue-400',    'text' => 'text-blue-700',    'hover_bg' => 'group-hover/returned-card:bg-blue-500',    'shadow' => 'rgba(37, 99, 235, 0.35)', 'shadow_deep' => 'rgba(37, 99, 235, 0.45)'],
+                                            ['bg' => 'bg-rose-100',    'border' => 'border-rose-200',    'border_l' => 'border-l-rose-400',    'text' => 'text-rose-700',    'hover_bg' => 'group-hover/returned-card:bg-rose-500',    'shadow' => 'rgba(225, 29, 72, 0.35)', 'shadow_deep' => 'rgba(225, 29, 72, 0.45)'],
+                                            ['bg' => 'bg-violet-100',  'border' => 'border-violet-200',  'border_l' => 'border-l-violet-400',  'text' => 'text-violet-700',  'hover_bg' => 'group-hover/returned-card:bg-violet-500',  'shadow' => 'rgba(124, 58, 237, 0.35)', 'shadow_deep' => 'rgba(124, 58, 237, 0.45)'],
+                                            ['bg' => 'bg-emerald-100', 'border' => 'border-emerald-200', 'border_l' => 'border-l-emerald-400', 'text' => 'text-emerald-700', 'hover_bg' => 'group-hover/returned-card:bg-emerald-500', 'shadow' => 'rgba(16, 185, 129, 0.35)', 'shadow_deep' => 'rgba(16, 185, 129, 0.45)'],
+                                            ['bg' => 'bg-amber-100',   'border' => 'border-amber-200',   'border_l' => 'border-l-amber-400',   'text' => 'text-amber-700',   'hover_bg' => 'group-hover/returned-card:bg-amber-500',   'shadow' => 'rgba(245, 158, 11, 0.35)', 'shadow_deep' => 'rgba(245, 158, 11, 0.45)'],
+                                            ['bg' => 'bg-slate-100',   'border' => 'border-slate-200',   'border_l' => 'border-l-slate-400',   'text' => 'text-slate-700',   'hover_bg' => 'group-hover/returned-card:bg-slate-500',   'shadow' => 'rgba(30, 41, 59, 0.35)',  'shadow_deep' => 'rgba(30, 41, 59, 0.45)'],
+                                            ['bg' => 'bg-indigo-100',  'border' => 'border-indigo-200',  'border_l' => 'border-l-indigo-400',  'text' => 'text-indigo-700',  'hover_bg' => 'group-hover/returned-card:bg-indigo-500',  'shadow' => 'rgba(79, 70, 229, 0.35)', 'shadow_deep' => 'rgba(79, 70, 229, 0.45)'],
+                                        ];
+
+                                        $clr = $durationColors[$loop->index % count($durationColors)];
+                                        $style = "--shadow-color: {$clr['shadow']}; --shadow-deep: {$clr['shadow_deep']};";
+                                    @endphp
+
+                                    <div class="admin-row-card loan-card bg-white rounded-[2.5rem] border-l-4 {{ $clr['border_l'] }} border border-slate-200 py-4 px-4 md:px-5 flex flex-col md:flex-row items-center gap-1 group/returned-card shadow-sm transition-all duration-500 transform-gpu hover:-translate-y-[0.375rem] hover:shadow-[0_0_20px_rgba(217,119,6,0.2),0_15px_30px_-15px_rgba(0,0,0,0.1)]"
+                                        data-start="{{ $fine->loan_date }}" 
+                                        data-end="{{ $fine->due_date }}" 
+                                        data-status="{{ $fine->status }}"
+                                        style="{{ $style }}">
+                                        
+                                        <div class="w-14 h-20 ml-2 flex-shrink-0 rounded-xl overflow-hidden shadow-md transition-all duration-500 transform transform-gpu
+                                                    -translate-x-1 -rotate-3 border border-slate-200 bg-white
+                                                    
+                                                    group-hover/returned-card:rotate-0 
+                                                    group-hover/returned-card:translate-x-0 
+                                                    group-hover/returned-card:scale-105
+                                                    group-hover/returned-card:border-amber-400/80
+                                                    group-hover/returned-card:shadow-[0_0_15px_rgba(217,119,6,0.25),0_8px_15px_-5px_rgba(0,0,0,0.15)]
+                                                    
+                                                    hover:!rotate-[1.5deg] 
+                                                    hover:!scale-110 
+                                                    hover:!shadow-[0_4px_10px_rgba(217,119,6,0.35),0_2px_5px_rgba(0,0,0,0.1)]
+                                                    cursor-pointer">
+                                                    
+                                            @php
+                                                $imagePath = $fine->book->image ?? $fine->book->cover_image ?? '';
+                                                $finalUrl = str_contains($imagePath, 'http') ? $imagePath : asset('storage/' . $imagePath);
+                                            @endphp 
+
+                                            {{-- PERBAIKAN PADA ATRIBUT ALT --}}
+                                            <img alt="{{ $fine->book->title ?? 'Cover' }}" 
+                                                class="w-full h-full object-cover" 
+                                                src="{{ $finalUrl }}" 
+                                                onerror="this.onerror=null; this.src='https://via.placeholder.com/150x225?text=No+Cover'"/>
+                                        </div>
+
+
+
+                                        <div class="flex-grow grid grid-cols-7 items-center gap-6 -ml-2">
+                                            <div class="flex items-center gap-4 col-span-1">
+                                            <div class="min-w-0 overflow-visible w-[160px]">
+                                                {{-- Title: Amber Gradient Edition --}}
+                                                <h3 class="font-black text-lg tracking-tighter font-heading leading-[1.2] py-2 -my-2 line-clamp-2 transform-gpu max-w-[10rem]" 
+                                                    style="
+                                                        backface-visibility: hidden;
+                                                        background-image: linear-gradient(to right, #d97706 5%, #fbbf24 95%);
+                                                        -webkit-background-clip: text;
+                                                        -webkit-text-fill-color: transparent;
+                                                        padding-bottom: 0.1em;
+                                                        margin-bottom: -0.1em;
+                                                    "
+                                                    title="{{ $fine->book->title ?? 'Judul Tidak Ada' }}">
+                                                    {{ $fine->book->title ?? 'Judul Tidak Ada' }}
+                                                </h3>
+
+                                                <div class="flex flex-row items-center mt-1">
+                                                    <span class="w-4 h-[2px] bg-amber-500/60 rounded-full flex-shrink-0
+                                                        transition-all duration-700 [transition-timing-function:cubic-bezier(0.34,1.56,0.64,1)] 
+                                                        group-hover:scale-x-[1.2] 
+                                                        group-hover/returned-card:!scale-x-[1.8] 
+                                                        origin-left 
+                                                        transform-gpu will-change-transform [backface-visibility:hidden]">
+                                                    </span>
+
+                                                    <p class="text-[10px] text-amber-500/60 font-black font-accent uppercase tracking-[0.15em] italic truncate leading-tight max-w-[10rem] flex-1 min-w-0 
+                                                        transition-all duration-700 [transition-timing-function:cubic-bezier(0.34,1.56,0.64,1)]
+                                                        ml-2 
+                                                        group-hover:pl-1
+                                                        group-hover/returned-card:!pl-4
+                                                        transform-gpu"
+                                                        title="{{ $fine->book->author_name ?? 'Penulis' }}">
+                                                        {{ $fine->book->author_name ?? 'Unknown Author' }}
+                                                    </p>
+                                                </div>  
+                                            </div>
+                                        </div>
+
+                                            <div class="w-[135px] flex-shrink-0 ml-0">
+                                                <div class="flex items-center justify-center gap-2 px-2 py-1.5 rounded-xl border transition-all duration-500 cursor-pointer group/category-badge
+                                                    {{-- KONDISI AWAL --}}  
+                                                    {{ $clr['bg'] }} {{ $clr['border'] }} {{ $clr['text'] }}
+                                                    shadow-[0_2px_4px_rgba(0,0,0,0.08)] 
+                                                    
+                                                    {{-- TAHAP 1: Card Hover --}}
+                                                    {{ $clr['hover_bg'] }}
+                                                    group-hover/returned-card:text-white 
+                                                    group-hover/returned-card:border-transparent    
+                                                    group-hover/returned-card:scale-105
+                                                    group-hover/returned-card:shadow-[0_4px_8px_var(--shadow-color)]
+
+                                                    {{-- TAHAP 2: Self Hover --}}
+                                                    hover:!scale-110 
+                                                    hover:-translate-y-1 
+                                                    hover:!shadow-[0_6px_12px_var(--shadow-deep)]
+                                                    
+                                                    {{-- Efek BG Level 600 --}}
+                                                    @if(str_contains($clr['hover_bg'], 'blue')) hover:!bg-blue-600 @endif
+                                                    @if(str_contains($clr['hover_bg'], 'rose')) hover:!bg-rose-600 @endif
+                                                    @if(str_contains($clr['hover_bg'], 'emerald')) hover:!bg-emerald-600 @endif
+                                                    @if(str_contains($clr['hover_bg'], 'amber')) hover:!bg-amber-600 @endif
+                                                    @if(str_contains($clr['hover_bg'], 'indigo')) hover:!bg-indigo-600 @endif
+                                                    @if(str_contains($clr['hover_bg'], 'slate')) hover:!bg-slate-600 @endif
+                                                    @if(str_contains($clr['hover_bg'], 'violet')) hover:!bg-violet-600 @endif"
+                                                    
+                                                    style="--shadow-color: {{ $clr['shadow'] }}; --shadow-deep: {{ $clr['shadow_deep'] }};">
+                                                    
+                                                    {{-- ICON: Rotate & Geser Kanan --}}
+                                                    <span class="material-symbols-outlined text-base transition-all duration-500 transform
+                                                        @if(str_contains($clr['text'], 'blue')) text-blue-600 @endif
+                                                        @if(str_contains($clr['text'], 'rose')) text-rose-600 @endif
+                                                        @if(str_contains($clr['text'], 'emerald')) text-emerald-600 @endif
+                                                        @if(str_contains($clr['text'], 'amber')) text-amber-600 @endif
+                                                        @if(str_contains($clr['text'], 'indigo')) text-indigo-600 @endif
+                                                        @if(str_contains($clr['text'], 'slate')) text-slate-600 @endif
+                                                        @if(str_contains($clr['text'], 'violet')) text-violet-600 @endif
+                                                        
+                                                        group-hover/returned-card:text-white
+                                                        
+                                                        group-hover/category-badge:translate-x-1
+                                                        group-hover/category-badge:rotate-12
+                                                        group-hover/category-badge:scale-110">
+                                                        person
+                                                    </span>
+                                                    
+                                                    {{-- TEXT REQUESTER --}}
+                                                    <div class="flex flex-col min-w-0">
+                                                        <span class="text-[13px] font-black font-modern tracking-tighter tabular-nums leading-none whitespace-nowrap truncate w-full">
+                                                            {{ $fine->user->username ?? $fine->user->name ?? 'User' }}
+                                                        </span>
+                                                        <span class="text-[9px] font-bold uppercase opacity-80 leading-tight">
+                                                            {{ $fine->user->role ?? 'N/A' }}
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            @php
+                                                $durationColors = [
+                                                    ['bg' => 'bg-rose-500',    'text_top' => 'text-rose-600/70',    'text_hover' => 'group-hover/returned:text-rose-500',    'shadow' => 'rgba(225,29,72,0.4)',  'shadow_deep' => 'rgba(225,29,72,0.45)'],
+                                                    ['bg' => 'bg-emerald-500', 'text_top' => 'text-emerald-600/70', 'text_hover' => 'group-hover/returned:text-emerald-500', 'shadow' => 'rgba(16,185,129,0.4)', 'shadow_deep' => 'rgba(16,185,129,0.45)'],
+                                                    ['bg' => 'bg-blue-500',    'text_top' => 'text-blue-600/70',    'text_hover' => 'group-hover/returned:text-blue-500',    'shadow' => 'rgba(37,99,235,0.4)',   'shadow_deep' => 'rgba(37,99,235,0.45)'],
+                                                    ['bg' => 'bg-amber-500',   'text_top' => 'text-amber-600/70',   'text_hover' => 'group-hover/returned:text-amber-500',   'shadow' => 'rgba(245,158,11,0.4)',  'shadow_deep' => 'rgba(245,158,11,0.45)'],
+                                                ];
+                                                
+                                                // Card 1: Emerald (Loan Date)
+                                                $clrEmerald = $durationColors[1];
+                                                $styleEmerald = "--shadow-color: {$clrEmerald['shadow']}; --shadow-deep: {$clrEmerald['shadow_deep']};";
+                                                
+                                                // Card 2: Rose (Due Date)
+                                                $clrRose = $durationColors[0];
+                                                $styleRose = "--shadow-color: {$clrRose['shadow']}; --shadow-deep: {$clrRose['shadow_deep']};";
+
+                                                // Card 3: Blue Edition
+                                                $clrBlue = $durationColors[2];
+                                                $styleBlue = "--shadow-color: {$clrBlue['shadow']}; --shadow-deep: {$clrBlue['shadow_deep']};";
+
+                                                // Card 4: Amber Edition (Baru)
+                                                $clrAmber = $durationColors[3];
+                                                $styleAmber = "--shadow-color: {$clrAmber['shadow']}; --shadow-deep: {$clrAmber['shadow_deep']};";
+                                            @endphp
+
+                                            {{-- Tanggal Pinjam: Emerald Edition (Plek Ketiplek 100%) --}}
+                                            <div class="ml-6 text-center w-[110px] flex flex-col items-center group/returned transition-all duration-700 ease-[cubic-bezier(0.4,0,0.2,1)] transform-gpu hover:-translate-y-1 -translate-x-2">
+                                                <div class="w-full">
+                                                    <div class="flex items-center px-4 h-9 rounded-full {{ $clrEmerald['bg'] }} text-white transition-all duration-700 ease-[cubic-bezier(0.4,0,0.2,1)] w-full justify-center border-none cursor-default transform-gpu 
+                                                        shadow-[0_4px_12px_var(--shadow-color)] 
+                                                        group-hover/returned:scale-105 
+                                                        group-hover/returned:shadow-[0_6px_16px_var(--shadow-deep)]"
+                                                        style="{{ $styleEmerald }}">
+                                                        <p class="text-[11px] font-black font-modern uppercase tracking-tighter tabular-nums leading-none whitespace-nowrap">
+                                                            {{ $fine->loan_date ? \Carbon\Carbon::parse($fine->loan_date)->format('M d, H:i') : '-' }}
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            {{-- Tanggal Jatuh Tempo: Rose Edition (Plek Ketiplek 100%) --}}
+                                            <div class="ml-3 text-center w-[110px] flex flex-col items-center group/returned transition-all duration-700 ease-[cubic-bezier(0.4,0,0.2,1)] transform-gpu hover:-translate-y-1 -translate-x-2">
+                                                <div class="w-full">
+                                                    <div class="flex items-center px-4 h-9 rounded-full {{ $clrRose['bg'] }} text-white transition-all duration-700 ease-[cubic-bezier(0.4,0,0.2,1)] w-full justify-center border-none cursor-default transform-gpu 
+                                                        shadow-[0_4px_12px_var(--shadow-color)] 
+                                                        group-hover/returned:scale-105 
+                                                        group-hover/returned:shadow-[0_6px_16px_var(--shadow-deep)]"
+                                                        style="{{ $styleRose }}">
+                                                        <p class="text-[11px] font-black font-modern uppercase tracking-tighter tabular-nums leading-none whitespace-nowrap">
+                                                            {{ $fine->due_date ? \Carbon\Carbon::parse($fine->due_date)->format('M d, H:i') : '-' }}
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            {{-- Tanggal Pengembalian: Blue Edition (Plek Ketiplek 100%) --}}
+                                            <div class="ml-0 text-center w-[110px] flex flex-col items-center group/returned transition-all duration-700 ease-[cubic-bezier(0.4,0,0.2,1)] transform-gpu hover:-translate-y-1 -translate-x-2">
+                                                <div class="w-full">
+                                                    <div class="flex items-center px-4 h-9 rounded-full {{ $clrBlue['bg'] }} text-white transition-all duration-700 ease-[cubic-bezier(0.4,0,0.2,1)] w-full justify-center border-none cursor-default transform-gpu 
+                                                        shadow-[0_4px_12px_var(--shadow-color)] 
+                                                        group-hover/returned:scale-105 
+                                                        group-hover/returned:shadow-[0_6px_16px_var(--shadow-deep)]"
+                                                        style="{{ $styleBlue }}">
+                                                        <p class="text-[11px] font-black font-modern uppercase tracking-tighter tabular-nums leading-none whitespace-nowrap">
+                                                            @if($fine->status === 'returned' || $fine->return_date)
+                                                                {{ \Carbon\Carbon::parse($fine->return_date)->format('M d, H:i') }}
+                                                            @else
+                                                                None
+                                                            @endif
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>    
+
+
+                                            <div class="-ml-2 text-center w-[140px] flex flex-col items-center group/returned transition-all duration-700 ease-[cubic-bezier(0.4,0,0.2,1)] transform-gpu hover:-translate-y-1 -translate-x-2">
+                                                <div class="w-full">
+                                                    <div class="flex items-center px-4 h-9 rounded-full {{ $clrAmber['bg'] }} text-white transition-all duration-700 ease-[cubic-bezier(0.4,0,0.2,1)] w-full justify-center border-none cursor-default transform-gpu 
+                                                        shadow-[0_4px_12px_var(--shadow-color)] 
+                                                        group-hover/returned:scale-105 
+                                                        group-hover/returned:shadow-[0_6px_16px_var(--shadow-deep)]"
+                                                        style="{{ $styleAmber }}">
+                                                        <p class="text-[12px] font-black font-modern uppercase tracking-tighter tabular-nums leading-none whitespace-nowrap">
+                                                            Rp {{ number_format($fine->calculated_fine, 0, ',', '.') }}
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            
+                                            @php
+                                                // 1. Definisi 5 skema warna (Presisi sesuai config JS Anda - Plek Ketiplek 100%)
+                                                $color_options = [
+                                                    'rose' => [
+                                                        'bg' => 'bg-rose-100', 'border' => 'border-rose-200', 'text' => 'text-rose-700',
+                                                        'hover_bg' => 'group-hover/returned-card:bg-rose-500', 
+                                                        'shadow' => 'rgba(225, 29, 72, 0.40)', 'shadow_deep' => 'rgba(225, 29, 72, 0.45)'
+                                                    ],
+                                                    'emerald' => [
+                                                        'bg' => 'bg-emerald-100', 'border' => 'border-emerald-200', 'text' => 'text-emerald-700',
+                                                        'hover_bg' => 'group-hover/returned-card:bg-emerald-500',
+                                                        'shadow' => 'rgba(16, 185, 129, 0.40)', 'shadow_deep' => 'rgba(16, 185, 129, 0.45)'
+                                                    ],
+                                                    'amber' => [
+                                                        'bg' => 'bg-amber-100', 'border' => 'border-amber-200', 'text' => 'text-amber-700',
+                                                        'hover_bg' => 'group-hover/returned-card:bg-amber-500',
+                                                        'shadow' => 'rgba(245, 158, 11, 0.40)', 'shadow_deep' => 'rgba(245, 158, 11, 0.45)'
+                                                    ],
+                                                    'violet' => [
+                                                        'bg' => 'bg-violet-100', 'border' => 'border-violet-200', 'text' => 'text-violet-700',
+                                                        'hover_bg' => 'group-hover/returned-card:bg-violet-500',
+                                                        'shadow' => 'rgba(124, 58, 237, 0.40)', 'shadow_deep' => 'rgba(124, 58, 237, 0.45)'
+                                                    ],
+                                                    'blue' => [
+                                                        'bg' => 'bg-blue-100', 'border' => 'border-blue-200', 'text' => 'text-blue-700',
+                                                        'hover_bg' => 'group-hover/returned-card:bg-blue-500',
+                                                        'shadow' => 'rgba(37, 99, 235, 0.40)', 'shadow_deep' => 'rgba(37, 99, 235, 0.45)'
+                                                    ],
+                                                ];
+
+                                                // 2. Fungsi RANDOM: Memilih 1 dari 5 secara acak
+                                                $clr = $color_options[array_rand($color_options)];
+                                            @endphp
+
+                                            <div class="ml-0 w-[120px] flex-shrink-0 ">
+                                                {{-- Card Overdue Books: Presisi 100% mengikuti instruksi radius, shadow, & efek hover --}}
+                                                <div class="flex items-center justify-center gap-2 px-4 h-8 rounded-xl border transition-all duration-500 cursor-pointer group/category-badge
+                                                    {{-- KONDISI AWAL --}}
+                                                    {{ $clr['bg'] }} {{ $clr['border'] }} {{ $clr['text'] }}
+                                                    shadow-[0_2px_4px_rgba(0,0,0,0.08)] 
+                                                    
+                                                    {{-- TAHAP 1: Card Hover (Shadow 0.40 - Radius 8px) --}}
+                                                    {{ $clr['hover_bg'] }}
+                                                    group-hover/returned-card:text-white 
+                                                    group-hover/returned-card:border-transparent 
+                                                    group-hover/returned-card:scale-105
+                                                    group-hover/returned-card:shadow-[0_4px_8px_var(--shadow-color)]
+
+                                                    {{-- TAHAP 2: Self Hover (Shadow 0.45 - Radius 12px & Terangkat) --}}
+                                                    hover:!scale-110 
+                                                    hover:-translate-y-1 
+                                                    hover:!shadow-[0_6px_12px_var(--shadow-deep)]
+                                                    
+                                                    {{-- Efek BG Level 600 saat kursor tepat di card --}}
+                                                    @if(str_contains($clr['hover_bg'], 'blue')) hover:!bg-blue-600 @endif
+                                                    @if(str_contains($clr['hover_bg'], 'rose')) hover:!bg-rose-600 @endif
+                                                    @if(str_contains($clr['hover_bg'], 'emerald')) hover:!bg-emerald-600 @endif
+                                                    @if(str_contains($clr['hover_bg'], 'amber')) hover:!bg-amber-600 @endif
+                                                    @if(str_contains($clr['hover_bg'], 'violet')) hover:!bg-violet-600 @endif"
+                                                    
+                                                    style="--shadow-color: {{ $clr['shadow'] }}; --shadow-deep: {{ $clr['shadow_deep'] }};">
+                                                    
+                                                    {{-- ICON: Auto Stories (Rotate, Translate, & Scale) --}}
+                                                    <span class="material-symbols-outlined text-base transition-all duration-500 transform
+                                                        @if(str_contains($clr['text'], 'blue')) text-blue-600 @endif
+                                                        @if(str_contains($clr['text'], 'rose')) text-rose-600 @endif
+                                                        @if(str_contains($clr['text'], 'emerald')) text-emerald-600 @endif
+                                                        @if(str_contains($clr['text'], 'amber')) text-amber-600 @endif
+                                                        @if(str_contains($clr['text'], 'violet')) text-violet-600 @endif
+                                                        
+                                                        group-hover/returned-card:text-white
+                                                        
+                                                        group-hover/category-badge:translate-x-1
+                                                        group-hover/category-badge:rotate-12
+                                                        group-hover/category-badge:scale-110">
+                                                        @if($fine->payment_status === 'Pay Off')
+                                                            check_circle
+                                                        @elseif($fine->payment_status === 'Installments')
+                                                            published_with_changes
+                                                        @else {{-- Unpaid --}}
+                                                            cancel
+                                                        @endif
+                                                    </span>
+                                                    
+                                                    {{-- TEXT: Total Books --}}
+                                                    <span class="text-[11px] font-black font-modern uppercase tracking-tighter tabular-nums leading-none whitespace-nowrap">
+                                                        {{ $fine->payment_status }}
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    @empty
+                                        <div class="col-span-full py-24 flex flex-col items-center justify-center w-full">
+                                            <span class="material-symbols-outlined text-slate-200 text-7xl mb-4 select-none">
+                                                payments
+                                            </span>
+                                            <p class="text-slate-400 font-accent uppercase tracking-[0.2em] text-xs font-black text-center">
+                                                No <span class="text-amber-600/80">Fines Transactions</span> in System.
+                                            </p>
+                                        </div>
+                                    @endforelse
+                                </div>
+                        </section>
+                    </div>
                 </div>
-            </div>
-        </main>
-    </div>    
+            </main>
+        </div>    
 
         <footer class="bg-slate-950 text-white pt-16 pb-12 rounded-t-[5rem] relative overflow-hidden shadow-[0_-20px_50px_rgba(0,0,0,0.1)] w-full block">
             <div class="absolute top-0 right-0 w-[400px] h-[400px] bg-blue-600/10 rounded-full blur-[100px] translate-x-1/2 -translate-y-1/2"></div>

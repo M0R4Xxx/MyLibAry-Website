@@ -108,7 +108,7 @@
                 welcomeSub.innerText = "Join us to borrow your favorite books.";
                 imageTitle.innerText = "Access Vast Knowledge";
                 imageDesc.innerText = "Enjoy thousands of digital and physical collections with a single integrated student account.";
-                sideImage.src = "{{ asset('images/dafSis.jpg') }}";
+                sideImage.src = "{{ asset('images/dafAdmin.jpg') }}";
 
                 if (window.innerWidth >= 768) {
                     formSide.style.transform = 'translateX(0)';
@@ -118,80 +118,76 @@
         }
 
         function setupValidation() {
-    const form = document.getElementById('registerForm');
-    const username = document.getElementById('fullname');
-    const email = document.getElementById('email');
-    const password = document.getElementById('password');
+            const form = document.getElementById('registerForm');
+            const username = document.getElementById('fullname');
+            const email = document.getElementById('email');
+            const password = document.getElementById('password');
 
-    function validateInput(el) {
-        el.setCustomValidity('');
+            function validateInput(el) {
+                el.setCustomValidity('');
 
-        if (el === username) {
-            const val = el.value.trim();
-            if (!val) el.setCustomValidity('Username tidak boleh kosong');
-            else if (/\s/.test(val)) el.setCustomValidity('Username tidak boleh menggunakan space');
-            else if (val.length < 4 || val.length > 14) el.setCustomValidity('Username minimal 4 huruf dan maksimal 14');
+                if (el === username) {
+                    const val = el.value.trim();
+                    if (!val) el.setCustomValidity('Username tidak boleh kosong');
+                    else if (/\s/.test(val)) el.setCustomValidity('Username tidak boleh menggunakan space');
+                    else if (val.length < 4 || val.length > 14) el.setCustomValidity('Username minimal 4 huruf dan maksimal 14');
+                }
+
+                if (el === email) {
+                    const val = el.value.trim();
+                    if (!val) el.setCustomValidity('Email tidak boleh kosong');
+                    else if (/\s/.test(val)) el.setCustomValidity('Email tidak boleh menggunakan space');
+                    else if (!val.endsWith('@gmail.com')) el.setCustomValidity('Email harus menggunakan tulisan "@gmail.com"');
+                }
+
+                if (el === password) {
+                    const val = el.value.trim();
+                    if (!val) el.setCustomValidity('Password tidak boleh kosong');
+                    else if (/\s/.test(val)) el.setCustomValidity('Password tidak boleh menggunakan space');
+                    else if (val.length < 6 || val.length > 14) el.setCustomValidity('Password minimal 6 huruf dan maksimal 14');
+                }
+            }
+
+            [username, email, password].forEach(input => {
+                input.addEventListener('input', () => {
+                    input.setCustomValidity(''); 
+                });
+            });
+
+            form.addEventListener('submit', function(e) {
+                validateInput(username);
+                validateInput(email);
+                validateInput(password);
+
+                if (!form.checkValidity()) {
+                    e.preventDefault();
+                    form.reportValidity();
+                }
+            });
+
+            @if($errors->any())
+                requestAnimationFrame(() => {
+                    @if($errors->has('username'))
+                        username.setCustomValidity("{{ $errors->first('username') }}");
+                        username.reportValidity();
+                    @elseif($errors->has('email'))
+                        email.setCustomValidity("{{ $errors->first('email') }}");
+                        email.reportValidity();
+                    @elseif($errors->has('password'))
+                        password.setCustomValidity("{{ $errors->first('password') }}");
+                        password.reportValidity();
+                    @endif
+                });
+
+                setTimeout(() => {
+                    [username, email, password].forEach(el => el.setCustomValidity(''));
+                }, 5000);
+            @endif
         }
-
-        if (el === email) {
-            const val = el.value.trim();
-            if (!val) el.setCustomValidity('Email tidak boleh kosong');
-            else if (/\s/.test(val)) el.setCustomValidity('Email tidak boleh menggunakan space');
-            else if (!val.endsWith('@gmail.com')) el.setCustomValidity('Email harus menggunakan tulisan "@gmail.com"');
-        }
-
-        if (el === password) {
-            const val = el.value.trim();
-            if (!val) el.setCustomValidity('Password tidak boleh kosong');
-            else if (/\s/.test(val)) el.setCustomValidity('Password tidak boleh menggunakan space');
-            else if (val.length < 6 || val.length > 14) el.setCustomValidity('Password minimal 6 huruf dan maksimal 14');
-        }
-    }
-
-    [username, email, password].forEach(input => {
-        input.addEventListener('input', () => {
-            input.setCustomValidity(''); 
-        });
-    });
-
-    form.addEventListener('submit', function(e) {
-        validateInput(username);
-        validateInput(email);
-        validateInput(password);
-
-        if (!form.checkValidity()) {
-            e.preventDefault();
-            form.reportValidity();
-            
-            setTimeout(() => {
-                [username, email, password].forEach(el => el.setCustomValidity(''));
-            }, 5000);
-        }
-    });
-
-    @if($errors->any())
-        @if($errors->has('username'))
-            username.setCustomValidity("{{ $errors->first('username') }}");
-            username.reportValidity();
-        @elseif($errors->has('email'))
-            email.setCustomValidity("{{ $errors->first('email') }}");
-            email.reportValidity();
-        @elseif($errors->has('password'))
-            password.setCustomValidity("{{ $errors->first('password') }}");
-            password.reportValidity();
-        @endif
-        
-        setTimeout(() => {
-            username.setCustomValidity('');
-            email.setCustomValidity('');
-            password.setCustomValidity('');
-        }, 5000);
-    @endif
-}
 </script>
 </head>
 
-<body class="bg-slate-100 dark:bg-slate-950 h-screen w-screen flex items-center justify-center p-4 md:p-6 overflow-hidden">
+<body class="bg-[#F8F9FC] dark:bg-slate-950 h-screen w-screen flex items-center justify-center p-4 md:p-6 overflow-hidden">
     <div class="relative w-full h-full max-w-6xl max-h-[calc(100vh-3rem)] bg-white dark:bg-slate-900 md:rounded-[2.5rem] shadow-2xl overflow-hidden flex flex-col md:flex-row transition-all duration-500" id="main-card">
         
         <div class="w-full md:w-1/2 h-full p-6 lg:p-10 xl:p-12 flex flex-col form-transition z-20 bg-white dark:bg-slate-900" id="form-side">
@@ -204,18 +200,12 @@
                     <h2 class="text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight leading-none" id="welcome-text">Student Registration</h2>
                     <p class="text-slate-400 dark:text-slate-500 text-xs font-bold uppercase tracking-[0.2em] mt-3 mb-6" id="welcome-sub">Join us to borrow your favorite books.</p>
                     
-                    <div class="relative bg-slate-100 dark:bg-slate-800 p-1 rounded-xl flex items-center mb-8 w-full max-w-[280px]">
-                        <div class="absolute w-[calc(50%-4px)] h-[calc(100%-8px)] bg-primary rounded-lg transition-transform duration-500 ease-out shadow-lg" id="toggle-bg" style="transform: translateX(0);"></div>
-                        <button class="relative z-10 w-1/2 py-2 text-[10px] font-black uppercase tracking-widest text-white transition-colors duration-300" id="btn-student" onclick="switchRole('siswa')">Siswa</button>
-                        <button class="relative z-10 w-1/2 py-2 text-[10px] font-black uppercase tracking-widest text-slate-600 dark:text-slate-300 transition-colors duration-300" id="btn-admin" onclick="switchRole('admin')">Admin</button>
-                    </div>
+                    
                 </div>
 
                 <div class="py-2 pb-8"> 
-                    <form action="{{ route('register') }}" method="POST" id="registerForm">
-                        @csrf
-                        <input type="hidden" name="role" id="role-input" value="{{ old('role', 'siswa') }}">
-                        
+                    <form action="{{ route('register') }}" method="POST" id="registerForm" novalidate>
+                        @csrf                        
                         <div class="space-y-5"> <div class="grid grid-cols-1 gap-4">
                                 <div>
                                     <label class="block text-[10px] font-black uppercase tracking-[0.15em] text-slate-500 dark:text-slate-400 mb-1.5 ml-1" for="fullname">Username</label>
@@ -267,7 +257,7 @@
         </div>
 
         <div class="hidden md:block w-1/2 h-full relative form-transition z-10 overflow-hidden" id="image-side">
-            <img id="side-image" alt="Library Background" class="absolute inset-0 w-full h-full object-cover transition-opacity duration-500" src="{{ asset('images/dafSis.jpg') }}" />
+            <img id="side-image" alt="Library Background" class="absolute inset-0 w-full h-full object-cover transition-opacity duration-500" src="{{ asset('images/dafAdmin.jpg') }}" />
             <div class="absolute inset-0 bg-gradient-to-br from-blue-900/40 via-transparent to-black/80 flex flex-col justify-end p-12">
                 <div class="max-w-md bg-white/10 backdrop-blur-xl border border-white/20 p-8 rounded-[2.5rem] shadow-2xl">
                     <h3 class="text-3xl font-extrabold text-white mb-4 leading-[1.1] tracking-tighter" id="image-title">Access Vast Knowledge</h3>

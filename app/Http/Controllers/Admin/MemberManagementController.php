@@ -184,7 +184,7 @@ public function index(Request $request)
                     }
                     $cleanMoneyInput = (int)preg_replace('/[^0-9]/', '', $keyword);
                     if ($cleanMoneyInput >= 1000) {
-                        if (abs($item->realtime_fine - $cleanMoneyInput) <= 50000) return true;
+                        if (abs($item->realtime_fine - $cleanMoneyInput) <= 5000) return true;
                     }
                 }
                 if (!$item->user) return false;
@@ -410,6 +410,7 @@ public function index(Request $request)
                         'book_title' => $loan->book->title ?? 'Buku',
                         'final_fine_amount' => $fineAmount,
                         'calculated_at' => $now,
+                        'payment_status' => 'Pay Off',
                     ]);
 
                     $loan->update([
@@ -417,6 +418,7 @@ public function index(Request $request)
                         'return_date' => $now->toDateTimeString(),
                     ]);
                 }
+                FineLog::where('user_id', $id)->update(['payment_status' => 'Pay Off']);
 
                 $balance->total_fine = 0; 
                 $balance->total_overdue_seconds = 0;
@@ -479,6 +481,7 @@ public function index(Request $request)
                     'book_title' => $loan->book->title ?? 'Buku',
                     'final_fine_amount' => $fineAmount,
                     'calculated_at' => $now,
+                    'payment_status' => 'Pay Off',
                 ]);
 
                 $loan->update([
@@ -486,6 +489,10 @@ public function index(Request $request)
                     'return_date' => $now->toDateTimeString(),
                 ]);
             }
+
+            FineLog::where('user_id', $id)
+            ->where('payment_status', 'Unpaid')
+            ->update(['payment_status' => 'Pay Off']);
 
             $balance->update([
                 'total_fine' => 0,

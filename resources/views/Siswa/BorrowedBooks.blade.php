@@ -449,10 +449,10 @@
                     if (text) text.innerText = "OVERDUE";
                     if (subText) {
                         subText.innerText = "Return Immediately";
-                        subText.className = "js-sub-text text-[10px] font-black mt-2 uppercase tracking-[0.2em] text-center w-full block transition-all duration-500 font-accent text-slate-500";
+                        subText.className = "js-sub-text text-[10px] font-black mt-2 uppercase tracking-[0.2em] text-center w-full block transition-all duration-500 font-accent text-rose-600";
                     }
-                    if (bar) bar.className = "js-progress-bar h-full rounded-full bg-slate-400 transition-all duration-500";
-                    updateStatusClass(badge, "bg-slate-600", "rgba(71, 85, 105, 0.5)"); 
+                    if (bar) bar.className = "js-progress-bar h-full rounded-full bg-gradient-to-r from-rose-500 to-red-600 transition-all duration-500";
+                    updateStatusClass(badge, "bg-rose-600", "rgba(225, 29, 72, 0.6)"); 
                     if (icon) icon.innerText = "history_toggle_off";
                 } else {
                     const days = Math.floor(remaining / (1000 * 60 * 60 * 24));

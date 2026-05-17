@@ -667,27 +667,59 @@
                         }
 
                         document.addEventListener('DOMContentLoaded', function() {
+                            
+
+
                             const addBookForm = document.getElementById('addBookForm');
                             const tagsInput = document.getElementById('input_tags');
                             const pageInput = document.getElementById('input_total_pages');
                             let isSubmitting = false;
 
                             if (addBookForm) {
-                                addBookForm.addEventListener('submit', function(e) {
-                                    if (pageInput) {
-                                const numericValue = pageInput.value.toString().replace(/[^0-9]/g, '');
-                                pageInput.value = numericValue;
-                            }
+                                addBookForm.addEventListener('submit', async function(e) { 
+                                    e.preventDefault(); 
 
-                                    if (isSubmitting) {
-                                        e.preventDefault();
-                                        return false;
+                                    if (isSubmitting) return false;
+
+                                    const titleInput = document.getElementById('input_title');
+                                    const title = titleInput.value.trim();
+
+                                    if (pageInput) {
+                                        const numericValue = pageInput.value.toString().replace(/[^0-9]/g, '');
+                                        pageInput.value = numericValue;
                                     }
-                                    isSubmitting = true;
-                                    const submitBtn = this.querySelector('button[type="submit"]');
-                                    if (submitBtn) {
-                                        submitBtn.disabled = true;
-                                        submitBtn.innerHTML = `<span class="material-symbols-outlined animate-spin">sync</span><span>Processing...</span>`;
+
+                                    try {
+                                        const response = await fetch(`{{ route('admin.books.check') }}?title=${encodeURIComponent(title)}`);
+                                        const data = await response.json();
+
+                                        if (data.exists) {
+                                            titleInput.setCustomValidity("Judul buku ini sudah terdaftar di database.");
+                                            titleInput.reportValidity();
+
+                                            setTimeout(() => {
+                                                titleInput.setCustomValidity("");
+                                                titleInput.reportValidity();
+                                            }, 3000);
+                                            
+                                            titleInput.focus();
+                                            isSubmitting = false; 
+                                            return false;
+                                        } else {
+                                            titleInput.setCustomValidity("");
+                                            
+                                            isSubmitting = true;
+                                            const submitBtn = this.querySelector('button[type="submit"]');
+                                            if (submitBtn) {
+                                                submitBtn.disabled = true;
+                                                submitBtn.innerHTML = `<span class="material-symbols-outlined animate-spin">sync</span><span>Processing...</span>`;
+                                            }
+                                            
+                                            this.submit(); 
+                                        }
+                                    } catch (error) {
+                                        console.error("Error checking title:", error);
+                                        isSubmitting = false;
                                     }
                                 });
                             }
@@ -1449,8 +1481,8 @@
                                                                 id="update_input_{{ $field['name'] }}" 
                                                                 required 
                                                                 autocomplete="off"
-                                                                @if($field['type'] == 'pages') max="{{ $field['max'] ?? 1000 }}" @else maxlength="{{ $field['max'] ?? 225 }}" @endif
-                                                                oninput="checkUpdateChange(this); handleMaxLimit(this); if('{{ $field['type'] }}' === 'pages') { updatePagesWidth(this, {{ $field['max'] ?? 1000 }}); }"
+                                                                @if($field['type'] == 'pages') min="1" max="{{ $field['max'] ?? 1000 }}" @else maxlength="{{ $field['max'] ?? 225 }}" @endif
+                                                                oninput="if('{{ $field['type'] }}' === 'pages') { if(this.value < 1 && this.value !== '') this.value = 1; updatePagesWidth(this, {{ $field['max'] ?? 1000 }}); } checkUpdateChange(this); handleMaxLimit(this);"
                                                                 placeholder="{{ $field['placeholder'] }}"
                                                                 @if($field['type'] == 'pages') 
                                                                     style="min-width: 10px; max-width: fit-content;"
@@ -1550,7 +1582,7 @@
                                     </div>
 
                                     <div class="px-10 pb-7 pt-4 bg-[#F8F9FC]">
-                                        <button type="submit" form="updateBookForm" id="updateSubmitBtn" disabled
+                                        <button type="submit" form="updateBookForm" id="updateSubmitBtn" disabled onclick="validateUpdateTitle(event)"
                                             class="w-full flex items-center justify-center gap-4 px-10 py-5 rounded-[2rem] font-black font-accent uppercase tracking-widest text-[11px] text-white transition-all duration-500 ease-in-out transform 
                                             disabled:opacity-50 disabled:grayscale disabled:cursor-not-allowed
                                             hover:-translate-y-1 hover:bg-right 
@@ -1701,17 +1733,19 @@
                                     placeholder.classList.add('hidden');
                                 }
 
-                                checkUpdateChange(); 
-                                document.getElementById('updateSubmitBtn').disabled = true;
 
-                                modal.classList.remove('hidden');
-                                setTimeout(() => {
-                                    backdrop.classList.add('opacity-100');
-                                    backdrop.classList.remove('opacity-0'); 
-                                    content.classList.add('translate-y-0', 'opacity-100');
-                                    content.classList.remove('translate-y-4', 'opacity-0');
-                                }, 10);
-                            }
+                                checkUpdateChange(); 
+                                    document.getElementById('updateSubmitBtn').disabled = true;
+
+                                    modal.classList.remove('hidden');
+                                    setTimeout(() => {
+                                        backdrop.classList.add('opacity-100');
+                                        backdrop.classList.remove('opacity-0'); 
+                                        content.classList.add('translate-y-0', 'opacity-100');
+                                        content.classList.remove('translate-y-4', 'opacity-0');
+                                    }, 10);
+                                }
+                                
 
                             function closeUpdateModal() {
                                 const modal = document.getElementById('updateModal');
@@ -1813,6 +1847,33 @@
                                     
                                     previewGroup.classList.remove('is-active');
                                 }
+                            }
+
+                            function validateUpdateTitle(event) {
+                                const titleInput = document.getElementById('update_input_title');
+                                if (!titleInput) return true;
+
+                                const newTitle = titleInput.value.trim().replace(/\s+/g, ' ').toLowerCase();
+                                const originalTitle = originalData.title ? originalData.title.trim().toLowerCase() : '';
+
+                                const existingTitles = @json($books->pluck('title')).map(t => t.trim().toLowerCase());
+
+                                if (newTitle !== originalTitle && existingTitles.includes(newTitle)) {
+                                    event.preventDefault(); 
+
+                                    titleInput.setCustomValidity("Judul buku ini sudah ada di database!");
+                                    titleInput.reportValidity();
+
+                                    titleInput.focus();
+
+                                    setTimeout(() => {
+                                        titleInput.setCustomValidity("");
+                                    }, 3000);
+                                    
+                                    return false;
+                                }
+                                
+                                return true;
                             }
 
                           

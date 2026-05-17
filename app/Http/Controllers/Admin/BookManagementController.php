@@ -211,6 +211,12 @@ class BookManagementController extends Controller
         }
     }
 
+    public function checkTitle(Request $request)
+    {
+        $exists = \App\Models\Book::where('title', $request->title)->exists();
+        return response()->json(['exists' => $exists]);
+    }
+
 
 
     public function update(Request $request, Book $book)

@@ -1279,7 +1279,7 @@
                                             if (remaining <= 0) {
                                                 if (text) text.innerText = "OVERDUE";
                                                 if (icon) { icon.innerText = "history_toggle_off"; icon.classList.remove('animate-pulse'); }
-                                                updateStatusClass(badge, "bg-slate-600", "rgba(71, 85, 105, 0.5)");
+                                                updateStatusClass(badge, "bg-rose-600", "rgba(225, 29, 72, 0.6)");
                                             } else {
                                                 const days = Math.floor(remaining / (1000 * 60 * 60 * 24));
                                                 const hours = Math.floor((remaining % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));

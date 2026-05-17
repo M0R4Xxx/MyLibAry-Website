@@ -199,8 +199,8 @@
             <div class="absolute inset-0 bg-gradient-to-br from-blue-900/40 via-transparent to-black/80 flex flex-col justify-end p-12">
                 
                 <div class="max-w-md bg-white/10 backdrop-blur-xl border border-white/20 p-8 rounded-[2.5rem] shadow-2xl">
-                    <h3 class="text-3xl font-extrabold text-white mb-4 leading-[1.1] tracking-tighter">Access Vast Knowledge</h3>
-                    <p class="text-blue-50 text-sm font-medium opacity-80 leading-relaxed italic border-l-2 border-primary/50 pl-4">Enjoy thousands of digital and physical collections with a single integrated student account.</p>
+                    <h3 class="text-3xl font-extrabold text-white mb-4 leading-[1.1] tracking-tighter">Secure Your Account</h3>
+                    <p class="text-blue-50 text-sm font-medium opacity-80 leading-relaxed italic border-l-2 border-primary/50 pl-4">Protect your digital identity by creating a strong, unique password to keep your library records safe.</p>
                 </div>
             </div>
         </div>

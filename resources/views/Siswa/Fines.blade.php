@@ -806,8 +806,7 @@
 
             
             <section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-x-6 gap-y-[38px]">
-                            @php
-                            // 1. Lakukan sorting SEBELUM loop dimulai
+                        @php
                             $sortedLoans = $activeLoans->sortByDesc('loan_date');
                         @endphp
 
@@ -871,14 +870,17 @@
                     </div>
 
                     <div class="flex flex-col flex-grow px-2">
-                        <div class="flex justify-center mb-3">
-                            <span class="font-accent px-4 py-1.5 rounded-xl text-[9px] font-black uppercase tracking-[0.2em] border transition-all duration-300 cursor-default shadow-sm transform inline-block max-w-[180px] truncate whitespace-nowrap
+                        <div class="flex flex-col items-center mb-3">
+                                    <span class="font-accent text-[9px] font-black uppercase tracking-[0.15em] text-amber-500 mb-1 -mt-1 animate-pulse">
+                                Accrued Fine
+                            </span>
+                            <span class="font-accent px-4 py-1.5 rounded-xl text-[10px] font-black uppercase tracking-[0.2em] border transition-all duration-300 cursor-default shadow-sm transform inline-block max-w-[180px] truncate whitespace-nowrap
                                 {{ $categoryColor['bg'] }} 
                                 {{ $categoryColor['text'] }} 
                                 {{ $categoryColor['border'] }} 
                                 {{ $categoryColor['hover'] }} 
                                 hover:text-white hover:scale-[1.04]">
-                                {{ $loan->book->category_name ?? 'General' }}
+                                Rp. {{ number_format($loan->current_fine, 0, ',', '.') }}
                             </span>
                         </div>
 
@@ -1125,8 +1127,8 @@
                             setBadge('emerald');
                         } else if (remaining <= 0) {
                             if (miniText) miniText.innerText = "OVERDUE";
-                            setBadge('slate');
-                            if (bar) bar.className = "js-progress-bar h-full rounded-full bg-slate-400 transition-all duration-1000";
+                            setBadge('rose');
+                            if (bar) bar.className = "js-progress-bar h-full rounded-full bg-gradient-to-r from-rose-500 to-red-600 transition-all duration-1000";
                             if (miniIcon) {
                                 miniIcon.innerText = "history_toggle_off";
                                 miniIcon.classList.remove('animate-spin', 'animate-pulse');

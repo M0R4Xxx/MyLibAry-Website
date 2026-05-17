@@ -399,7 +399,7 @@
                                             deep: "rgba(190, 18, 60, 0.45)" 
                                         },
 
-                                        overdue:  { cls: "bg-slate-100 border-slate-200 text-slate-700 group-hover:bg-slate-500", shadow: "rgba(30, 41, 59, 0.35)", deep: "rgba(30, 41, 59, 0.45)" },
+                                        overdue:  { cls: "bg-rose-100 border-rose-200 text-rose-700 group-hover:bg-rose-500", shadow: "rgba(225, 29, 72, 0.35)", deep: "rgba(225, 29, 72, 0.45)" },
                                         critical: { cls: "bg-rose-100 border-rose-200 text-rose-700 group-hover:bg-rose-500", shadow: "rgba(225, 29, 72, 0.35)", deep: "rgba(225, 29, 72, 0.45)" },
                                         warning:  { cls: "bg-orange-100 border-orange-200 text-orange-700 group-hover:bg-orange-500", shadow: "rgba(245, 158, 11, 0.35)", deep: "rgba(245, 158, 11, 0.45)" },
                                         safe:     { cls: "bg-emerald-100 border-emerald-200 text-emerald-700 group-hover:bg-emerald-500", shadow: "rgba(16, 185, 129, 0.35)", deep: "rgba(16, 185, 129, 0.45)" }
@@ -451,7 +451,7 @@
 
                                     if (remaining <= 0) {
                                         if (text) text.innerText = "OVERDUE";
-                                        if (bar) bar.className = "js-progress-bar h-full rounded-full bg-slate-400";
+                                        if (bar) bar.className = "js-progress-bar h-full rounded-full bg-gradient-to-r from-rose-500 to-red-600";
                                         setBadgeStyle('overdue');
                                         if (icon) icon.innerText = "history_toggle_off";
                                     } else {

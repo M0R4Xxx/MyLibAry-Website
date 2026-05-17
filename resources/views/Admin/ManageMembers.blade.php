@@ -799,10 +799,6 @@
                 </style>
                 </section>
                 
-
-
-
-
                 <div class="flex flex-wrap items-center justify-center gap-6">
                     {{-- 1. Search Bar - PLEK KETIPLEK 100% (Aksen Indigo) --}}
                     <div class="w-full max-w-2xl relative h-[70px] flex items-center">
